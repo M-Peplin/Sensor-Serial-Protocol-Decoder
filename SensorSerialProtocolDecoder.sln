@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorSerialProtocolDecoder", "SensorSerialProtocolDecoder\SensorSerialProtocolDecoder.csproj", "{45302414-821B-4764-832D-E1273BC50165}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45302414-821B-4764-832D-E1273BC50165}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45302414-821B-4764-832D-E1273BC50165}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45302414-821B-4764-832D-E1273BC50165}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45302414-821B-4764-832D-E1273BC50165}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5DF6294-7145-4186-B369-8A8612255BA7}
+	EndGlobalSection
+EndGlobal
