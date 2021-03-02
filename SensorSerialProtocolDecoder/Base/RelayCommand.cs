@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace SensorSerialProtocolDecoder.Base
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
         #region Fields
         readonly Action<object> _execute;
@@ -25,11 +25,9 @@ namespace SensorSerialProtocolDecoder.Base
             if (execute == null)
             {
                 throw new ArgumentNullException("execute");
-
+            }
                 _execute = execute;
                 _canExecute = canExecute;
-            }
-                
         }
         #endregion
         #region ICommand
