@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SensorSerialProtocolDecoder.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="Serial Protocol Decoder" Height="600" Width="800"
+        WindowStyle="ThreeDBorderWindow" 
+        Background="#FF1E67E6">
     <Grid>
-        
+        <Grid.ColumnDefinitions>            
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.RowSpan="3" Header="Send Message">
+            <Grid>                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Content="Echo Range ON" Grid.Row="0" Margin="5,5,5,5" Style="{StaticResource Standard button}"></Button>
+                <Button Content="Echo Range OFF" Grid.Row="0" Grid.Column="1" Style="{StaticResource Standard button}"></Button>
+                <Button Content="Display settings" Grid.Row="1" Grid.Column="0" Style="{StaticResource Standard button}"></Button>
+                <Button Content="Set range" Grid.Row="1" Grid.Column="1" Style="{StaticResource Standard button}"></Button>
+                <Label Grid.Column="2" Content="Status:" Style="{StaticResource StandardLabel}" HorizontalAlignment="Center"></Label>
+                <Label Grid.Column="2" Grid.Row="1" Content="Range:" Style="{StaticResource StandardLabel}" HorizontalAlignment="Center" Margin="0"></Label>
+                <ComboBox  Grid.Column="3" Grid.Row="1" Style="{StaticResource ComboBoxFlatStyle}" Margin="5"></ComboBox>
+                <Label Grid.Column="3" Content="Off" Style="{StaticResource StandardLabel}"></Label>
+                <Label Content="Custom Message:" Style="{StaticResource StandardLabel}" Grid.Row="2"></Label>
+                <RichTextBox Grid.Row="3" Grid.ColumnSpan="2"></RichTextBox>
+                <Button Grid.Row="3" Grid.Column="2" Content="Send" Style="{StaticResource Standard button}" Grid.ColumnSpan="2"></Button>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="3"  Grid.RowSpan="3" Header="Receive Message">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Content="Start listening" Grid.Row="0" Grid.Column="0" Style="{StaticResource Standard button}" Width="150" Height="40"></Button>
+                <Button Content="Save to file" Grid.Row="0" Grid.Column="3" Style="{StaticResource Standard button}" Width="150" Height="40"></Button>                
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="20">
+                    <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="80"></TextBox>
+                    <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Content="Seconds" VerticalAlignment="Center"></Label>
+                </StackPanel>
+                
+                <DockPanel Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
+                    <TextBox></TextBox>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.RowSpan="6" Header="Serial connection setup">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <Label Content="Port:" Style="{StaticResource StandardLabel }"></Label>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
+                    <Label Content="Baud rate:" Style="{StaticResource StandardLabel }"></Label>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <StatusBar Grid.Row="6" Grid.ColumnSpan="2"></StatusBar>
     </Grid>
 </Window>
