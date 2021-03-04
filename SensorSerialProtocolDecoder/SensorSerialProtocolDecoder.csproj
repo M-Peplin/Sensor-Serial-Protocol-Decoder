@@ -63,6 +63,7 @@
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
     <Compile Include="Model\SensorModel.cs" />
+    <Compile Include="Model\COMPortModel.cs" />
     <Compile Include="Tools\COMPortService.cs" />
     <Compile Include="Tools\DecodeSentence.cs" />
     <Compile Include="Tools\SensorStatusSend.cs" />

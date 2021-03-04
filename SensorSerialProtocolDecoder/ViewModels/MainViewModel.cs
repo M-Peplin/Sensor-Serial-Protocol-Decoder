@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using SensorSerialProtocolDecoder.Base;
 using SensorSerialProtocolDecoder.Model;
+using SensorSerialProtocolDecoder.Tools;
 
 namespace SensorSerialProtocolDecoder.ViewModels
 {
@@ -13,6 +15,15 @@ namespace SensorSerialProtocolDecoder.ViewModels
     {
         new SensorModel sensorModel = new SensorModel();
         int i = 0;
+
+        public MainViewModel()
+        {
+            ComPorts = new ObservableCollection<COMPortModel>()
+            {
+                new COMPortModel(){PortId = 1, PortBaudRate = "COM1"}
+            };
+        }
+
         #region Buttons
         private ICommand _echoRangeOn;
         public ICommand EchoRangeOn
@@ -137,6 +148,34 @@ namespace SensorSerialProtocolDecoder.ViewModels
             }
         }
         #endregion Buttons
+
+        #region ComPorts
+        private ObservableCollection<COMPortModel> _comPorts;
+        public ObservableCollection<COMPortModel> ComPorts
+        {
+            get
+            {
+                return _comPorts;
+            }
+            set
+            {
+                _comPorts = value;
+            }
+        }
+        private COMPortModel _selectedComPort;
+        public COMPortModel SelectedComPort
+        {
+            get
+            {
+                return _selectedComPort;
+            }
+            set
+            {
+                _selectedComPort = value;
+            }
+        }
+
+        #endregion ComPorts
 
         public void test()
         {

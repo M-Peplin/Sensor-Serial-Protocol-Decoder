@@ -12,7 +12,8 @@ namespace SensorSerialProtocolDecoder.Model
 
         new SensorStatusSend sensorStatusSend = new SensorStatusSend();
         new DecodeSentence decodeSentence = new DecodeSentence();
-        new COMPortService comPortSercice = new COMPortService();
+        new COMPortService comPortSercice = new COMPortService();      
+
 
         public void test()
         {

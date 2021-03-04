@@ -87,7 +87,11 @@
                 </Grid.RowDefinitions>
                 <StackPanel>                    
                     <Label Content="Port:" Style="{StaticResource StandardLabel}"></Label>
-                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
+                              ItemsSource="{Binding Path=ComPorts}"
+                              SelectedItem="{Binding Path=SelectedComPort}"
+                              DisplayMemberPath="PortBaudRate"
+                              ></ComboBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0"></Button>
                         <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0"></Button>
