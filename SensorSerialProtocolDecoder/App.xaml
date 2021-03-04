@@ -127,7 +127,7 @@
         </Style>
         <!-- End of Flat ComboBox -->
 
-
+        <!-- Standard button-->
         <Style x:Key="Standard button"  TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#373737" />
             <Setter Property="Foreground" Value="White" />
@@ -161,6 +161,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- End of standard button-->
 
+        <!-- Small button -->
+        <Style x:Key="Small button"  TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#373737" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Margin" Value="5,5,5,5"></Setter>            
+        </Style>
+        <!-- End of small button -->
     </Application.Resources>
 </Application>

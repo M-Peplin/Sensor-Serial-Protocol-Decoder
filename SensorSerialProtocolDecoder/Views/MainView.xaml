@@ -3,12 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SensorSerialProtocolDecoder.Views"
+        xmlns:local="clr-namespace:SensorSerialProtocolDecoder.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Serial Protocol Decoder" Height="600" Width="800"
         WindowStyle="ThreeDBorderWindow" 
         Background="#FF1E67E6">
+    <Window.DataContext>
+        <local:MainViewModel></local:MainViewModel>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>            
             <ColumnDefinition Width="7*"></ColumnDefinition>
@@ -37,8 +40,8 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Content="Echo Range ON" Grid.Row="0" Margin="5,5,5,5" Style="{StaticResource Standard button}"></Button>
-                <Button Content="Echo Range OFF" Grid.Row="0" Grid.Column="1" Style="{StaticResource Standard button}"></Button>
+                <Button Content="Echo Range ON" Grid.Row="0" Margin="5,5,5,5" Style="{StaticResource Standard button}" Command="{Binding Path=EchoRangeOn}"></Button>
+                <Button Content="Echo Range OFF" Grid.Row="0" Grid.Column="1" Style="{StaticResource Standard button}" Command="{Binding EchoRangeOff}"></Button>
                 <Button Content="Display settings" Grid.Row="1" Grid.Column="0" Style="{StaticResource Standard button}"></Button>
                 <Button Content="Set range" Grid.Row="1" Grid.Column="1" Style="{StaticResource Standard button}"></Button>
                 <Label Grid.Column="2" Content="Status:" Style="{StaticResource StandardLabel}" HorizontalAlignment="Center"></Label>
@@ -78,14 +81,18 @@
         <GroupBox Grid.Column="1" Grid.RowSpan="6" Header="Serial connection setup">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel>
-                    <Label Content="Port:" Style="{StaticResource StandardLabel }"></Label>
+                <StackPanel>                    
+                    <Label Content="Port:" Style="{StaticResource StandardLabel}"></Label>
                     <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
-                    <Label Content="Baud rate:" Style="{StaticResource StandardLabel }"></Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0"></Button>
+                        <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0"></Button>
+                    </StackPanel>
+                    <Label Content="Baud rate:" Style="{StaticResource StandardLabel}"></Label>
                     <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
                 </StackPanel>
             </Grid>

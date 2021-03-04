@@ -62,6 +62,10 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="Model\SensorModel.cs" />
+    <Compile Include="Tools\COMPortService.cs" />
+    <Compile Include="Tools\DecodeSentence.cs" />
+    <Compile Include="Tools\SensorStatusSend.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
