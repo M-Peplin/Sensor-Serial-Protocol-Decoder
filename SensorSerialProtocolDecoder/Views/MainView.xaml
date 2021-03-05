@@ -90,14 +90,17 @@
                     <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
                               ItemsSource="{Binding Path=ComPorts}"
                               SelectedItem="{Binding Path=SelectedComPort}"
-                              DisplayMemberPath="PortBaudRate"
+                              DisplayMemberPath="PortName"                              
                               ></ComboBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0"></Button>
+                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0" Command="{Binding Path=OpenPort}"></Button>
                         <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0"></Button>
                     </StackPanel>
                     <Label Content="Baud rate:" Style="{StaticResource StandardLabel}"></Label>
-                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"></ComboBox>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
+                              ItemsSource="{Binding Path=BaudRates}"
+                              SelectedItem="{Binding Path=SelectedBaudRate}"                              
+                              ></ComboBox>
                 </StackPanel>
             </Grid>
         </GroupBox>

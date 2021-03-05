@@ -4,19 +4,35 @@ using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SensorSerialProtocolDecoder.Tools
 {
     public class COMPortService
     {    
 
-        SerialPort createSerialPort(int baudRate)
+        public SerialPort createSerialPort(string baudRate, string name)
         {
-            SerialPort mySerialPort = new SerialPort("COM1");
-            //mySerialPort.BaudRate = baudRate;
-            mySerialPort.BaudRate = 115200;
+            SerialPort serialPort = new SerialPort(name);
+            int baud = 0;           
+            try
+            {
+                baud = Int32.Parse(baudRate);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-            return mySerialPort;
+            serialPort.BaudRate = baud;
+            serialPort.Parity = Parity.None;
+            serialPort.DataBits = 8;
+            serialPort.StopBits = StopBits.One;
+
+            //serialPort.BaudRate = 9600
+            //mySerialPort.BaudRate = 115200;
+
+            return serialPort;
         }    
 
         

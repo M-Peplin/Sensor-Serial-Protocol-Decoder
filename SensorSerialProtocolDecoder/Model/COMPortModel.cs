@@ -8,6 +8,7 @@ namespace SensorSerialProtocolDecoder.Tools
 {
     public class COMPortModel
     {
+        public COMPortService portService = new COMPortService();
         private int portId;
 
         public int PortId
@@ -23,17 +24,17 @@ namespace SensorSerialProtocolDecoder.Tools
         }
 
 
-        private string portBaudRate;
+        private string portName;
 
-        public string PortBaudRate
+        public string PortName
         {
             get
             {
-                return portBaudRate;
+                return portName;
             }
             set
             {
-                portBaudRate = value;
+                portName = value;
             }
         }
     }

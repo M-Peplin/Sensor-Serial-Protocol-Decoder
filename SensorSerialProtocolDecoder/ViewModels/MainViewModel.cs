@@ -20,8 +20,15 @@ namespace SensorSerialProtocolDecoder.ViewModels
         {
             ComPorts = new ObservableCollection<COMPortModel>()
             {
-                new COMPortModel(){PortId = 1, PortBaudRate = "COM1"}
+                new COMPortModel(){PortId = 1, PortName = "COM1"}                
             };
+            SelectedComPort = ComPorts.First();
+            BaudRates = new ObservableCollection<string>()
+            {
+                "115200",
+                "9600",
+            };
+            SelectedBaudRate = BaudRates.First();            
         }
 
         #region Buttons
@@ -127,12 +134,14 @@ namespace SensorSerialProtocolDecoder.ViewModels
         {
             get
             {
+                if(_openPort == null)
+                {
+                    _openPort = new RelayCommand(
+                        param => SelectedComPort.portService.createSerialPort(SelectedBaudRate, SelectedComPort.PortName),
+                        param => true);                        
+                }
                 return _openPort;
-            }
-            set
-            {
-                SetValue(ref _openPort, value);
-            }
+            }            
         }
 
         private ICommand _closePort;
@@ -162,7 +171,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 _comPorts = value;
             }
         }
-        private COMPortModel _selectedComPort;
+        private COMPortModel _selectedComPort = new COMPortModel() { PortId = 1, PortName = "COM1" };
         public COMPortModel SelectedComPort
         {
             get
@@ -177,6 +186,35 @@ namespace SensorSerialProtocolDecoder.ViewModels
 
         #endregion ComPorts
 
+        #region BaudRates
+        private ObservableCollection<string> _baudRates;
+
+        public ObservableCollection<string> BaudRates
+        {
+            get
+            {
+                return _baudRates;
+            }
+            set
+            {
+                _baudRates = value;
+            }
+        }
+
+        private string _selectedBaudRate;
+
+        public string SelectedBaudRate
+        {
+            get
+            {
+                return _selectedBaudRate;
+            }
+            set
+            {
+                _selectedBaudRate = value;
+            }
+        }
+        #endregion BaudRates
         public void test()
         {
             int i = 1;
