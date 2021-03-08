@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using SensorSerialProtocolDecoder.Base;
 using SensorSerialProtocolDecoder.Model;
-using SensorSerialProtocolDecoder.Tools;
+using SensorSerialProtocolDecoder.Services;
 
 namespace SensorSerialProtocolDecoder.ViewModels
 {

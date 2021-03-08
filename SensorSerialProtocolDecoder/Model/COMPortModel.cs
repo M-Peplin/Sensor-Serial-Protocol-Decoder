@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorSerialProtocolDecoder.Tools
+namespace SensorSerialProtocolDecoder.Services
 {
     public class COMPortModel
     {

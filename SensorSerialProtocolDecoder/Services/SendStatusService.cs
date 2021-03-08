@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SensorSerialProtocolDecoder.Tools
+namespace SensorSerialProtocolDecoder.Services
 {
-    public class SensorStatusSend
+    public class SendStatusService
     {
         public string sendMessageOn()
         {

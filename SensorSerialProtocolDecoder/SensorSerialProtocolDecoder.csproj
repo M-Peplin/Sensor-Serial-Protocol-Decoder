@@ -62,11 +62,14 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\RelayCommand.cs" />
+    <Compile Include="Interfaces\ISendStatusService.cs" />
     <Compile Include="Model\SensorModel.cs" />
     <Compile Include="Model\COMPortModel.cs" />
-    <Compile Include="Tools\COMPortService.cs" />
-    <Compile Include="Tools\DecodeSentence.cs" />
-    <Compile Include="Tools\SensorStatusSend.cs" />
+    <Compile Include="Services\COMPortService.cs" />
+    <Compile Include="Services\DecodeService.cs" />
+    <Compile Include="Interfaces\ICOMPortService.cs" />
+    <Compile Include="Interfaces\IDecodeService.cs" />
+    <Compile Include="Services\SendStatusService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>

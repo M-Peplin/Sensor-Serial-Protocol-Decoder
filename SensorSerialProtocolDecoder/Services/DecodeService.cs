@@ -6,17 +6,18 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SensorSerialProtocolDecoder.Interfaces;
 
-namespace SensorSerialProtocolDecoder.Tools
+namespace SensorSerialProtocolDecoder.Services
 {
-    class DecodeSentence
+    class DecodeService : IDecodeService
     {
 
         byte[] bytes;
         private static UdpClient listener;
         private static IPEndPoint source;
 
-        public void DecodeEnvelopeData(IAsyncResult result, string message)
+        public void decodeEnvelopeData(IAsyncResult result, string message)
         {
             listener = (UdpClient)result.AsyncState;
             source = new IPEndPoint(0,0);

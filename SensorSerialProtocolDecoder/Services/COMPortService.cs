@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SensorSerialProtocolDecoder.Interfaces;
 
-namespace SensorSerialProtocolDecoder.Tools
+namespace SensorSerialProtocolDecoder.Services
 {
-    public class COMPortService
+    public class COMPortService : ICOMPortService
     {    
 
         public SerialPort createSerialPort(string baudRate, string name)

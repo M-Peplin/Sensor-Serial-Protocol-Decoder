@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SensorSerialProtocolDecoder.Tools;
+using SensorSerialProtocolDecoder.Services;
 
 namespace SensorSerialProtocolDecoder.Model
 {
     public class SensorModel
     {
 
-        new SensorStatusSend sensorStatusSend = new SensorStatusSend();
-        new DecodeSentence decodeSentence = new DecodeSentence();
+        new SendStatusService sensorStatusSend = new SendStatusService();
+        new DecodeService decodeSentence = new DecodeService();
         new COMPortService comPortSercice = new COMPortService();      
 
 
