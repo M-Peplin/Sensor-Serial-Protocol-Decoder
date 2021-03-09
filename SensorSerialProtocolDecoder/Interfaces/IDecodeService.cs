@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SensorSerialProtocolDecoder.Services
 {
-    interface IDecodeService
+    public interface IDecodeService
     {
         void decodeEnvelopeData(IAsyncResult result, string message);
     }

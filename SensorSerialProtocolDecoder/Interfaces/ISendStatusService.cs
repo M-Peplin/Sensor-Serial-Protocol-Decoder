@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SensorSerialProtocolDecoder.Interfaces
 {
-    interface ISendStatusService
+    public interface ISendStatusService
     {
+
     }
 }

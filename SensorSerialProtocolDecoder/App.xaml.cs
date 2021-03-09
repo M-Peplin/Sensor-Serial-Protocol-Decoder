@@ -5,6 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Ninject;
+using SensorSerialProtocolDecoder.Interfaces;
+using SensorSerialProtocolDecoder.Services;
+using SensorSerialProtocolDecoder.Views;
+using SensorSerialProtocolDecoder.ViewModels;
 
 namespace SensorSerialProtocolDecoder
 {
@@ -13,5 +18,17 @@ namespace SensorSerialProtocolDecoder
     /// </summary>
     public partial class App : Application
     {
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            IKernel kernel = new StandardKernel();
+            kernel.Bind<ICOMPortService>().To<COMPortService>();
+
+            var applicationViewmodel = kernel.Get<MainViewModel>();
+
+
+            MainView mainView = new MainView();
+            mainView.DataContext = applicationViewmodel;
+            mainView.Show();
+        }
     }
 }

@@ -13,11 +13,13 @@ namespace SensorSerialProtocolDecoder.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        private readonly ICOMPortService _comPortService;
         new SensorModel sensorModel = new SensorModel();
         int i = 0;
 
-        public MainViewModel()
+        public MainViewModel(ICOMPortService comPortService)
         {
+            this._comPortService = comPortService;
             ComPorts = new ObservableCollection<COMPortModel>()
             {
                 new COMPortModel(){PortId = 1, PortName = "COM1"}                
@@ -137,7 +139,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if(_openPort == null)
                 {
                     _openPort = new RelayCommand(
-                        param => SelectedComPort.portService.createSerialPort(SelectedBaudRate, SelectedComPort.PortName),
+                        param => _comPortService.createSerialPort(SelectedBaudRate, SelectedComPort.PortName),
                         param => true);                        
                 }
                 return _openPort;

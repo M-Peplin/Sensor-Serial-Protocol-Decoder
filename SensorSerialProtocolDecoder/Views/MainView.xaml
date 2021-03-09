@@ -8,10 +8,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Serial Protocol Decoder" Height="600" Width="800"
         WindowStyle="ThreeDBorderWindow" 
-        Background="#FF1E67E6">
-    <Window.DataContext>
-        <local:MainViewModel></local:MainViewModel>
-    </Window.DataContext>
+        Background="#FF1E67E6">    
     <Grid>
         <Grid.ColumnDefinitions>            
             <ColumnDefinition Width="7*"></ColumnDefinition>

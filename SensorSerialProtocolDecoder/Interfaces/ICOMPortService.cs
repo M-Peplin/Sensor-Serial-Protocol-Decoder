@@ -8,7 +8,7 @@ using SensorSerialProtocolDecoder.Services;
 
 namespace SensorSerialProtocolDecoder.Services
 {
-    interface ICOMPortService
+    public interface ICOMPortService
     {
          SerialPort createSerialPort(string baudRate, string name);
     }
