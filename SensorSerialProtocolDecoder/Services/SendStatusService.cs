@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SensorSerialProtocolDecoder.Interfaces;
 
 namespace SensorSerialProtocolDecoder.Services
 {
-    public class SendStatusService
+    public class SendStatusService : ISendStatusService
     {
         public string sendMessageOn()
         {

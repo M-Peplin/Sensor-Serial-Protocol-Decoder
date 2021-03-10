@@ -33,10 +33,10 @@ namespace SensorSerialProtocolDecoder.Services
             //serialPort.BaudRate = 9600
             //mySerialPort.BaudRate = 115200;
 
-            return serialPort;
-        }    
+            serialPort.Open();
 
-        
-       
+            return serialPort;
+        }         
+                       
     }
 }

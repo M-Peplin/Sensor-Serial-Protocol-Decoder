@@ -22,6 +22,8 @@ namespace SensorSerialProtocolDecoder
         {
             IKernel kernel = new StandardKernel();
             kernel.Bind<ICOMPortService>().To<COMPortService>();
+            kernel.Bind<IDecodeService>().To<DecodeService>();
+            kernel.Bind<ISendStatusService>().To<SendStatusService>();
 
             var applicationViewmodel = kernel.Get<MainViewModel>();
 

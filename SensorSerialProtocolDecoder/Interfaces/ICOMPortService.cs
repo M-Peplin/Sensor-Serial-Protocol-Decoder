@@ -10,6 +10,6 @@ namespace SensorSerialProtocolDecoder.Services
 {
     public interface ICOMPortService
     {
-         SerialPort createSerialPort(string baudRate, string name);
+        SerialPort createSerialPort(string baudRate, string name);        
     }
 }
