@@ -8,6 +8,7 @@ using System.Windows.Input;
 using SensorSerialProtocolDecoder.Base;
 using SensorSerialProtocolDecoder.Model;
 using SensorSerialProtocolDecoder.Services;
+using SensorSerialProtocolDecoder.Interfaces;
 using System.IO.Ports;
 
 namespace SensorSerialProtocolDecoder.ViewModels
@@ -15,11 +16,17 @@ namespace SensorSerialProtocolDecoder.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly ICOMPortService _comPortService;
+        private readonly IDecodeService _decodeService;
+        private readonly ISendStatusService _sendStatusService;
         new SensorModel sensorModel = new SensorModel();                
 
-        public MainViewModel(ICOMPortService comPortService)
+        public MainViewModel(ICOMPortService comPortService,
+            IDecodeService decodeService,
+            ISendStatusService sendStatusService)
         {
             this._comPortService = comPortService;
+            this._decodeService = decodeService;
+            this._sendStatusService = sendStatusService;
 
             //Get avalible port names and add to ComPort list of strings
             ComPorts = new ObservableCollection<String>();            
@@ -40,6 +47,8 @@ namespace SensorSerialProtocolDecoder.ViewModels
         }
 
         private SerialPort mySerialPort;
+        //Func<SerialPort, string> setPortStatus; 
+        Action<string> setPortStatus;
 
         #region Buttons
         private ICommand _echoRangeOn;
@@ -147,7 +156,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if(_openPort == null)
                 {
                     _openPort = new RelayCommand(
-                        param => mySerialPort = _comPortService.createSerialPort(SelectedBaudRate, SelectedComPort),
+                        param => mySerialPort = _comPortService.createSerialPort(SelectedBaudRate, SelectedComPort, value => PortStatus = value),
                         param => true);                        
                 }
                 return _openPort;
@@ -221,6 +230,20 @@ namespace SensorSerialProtocolDecoder.ViewModels
             set
             {
                 _selectedComPort = value;
+            }
+        }
+
+        private string _portStatus = "";
+
+        public string PortStatus
+        {
+            get
+            {
+                return _portStatus;
+            }
+            set
+            {
+                SetValue(ref _portStatus, value);
             }
         }
 

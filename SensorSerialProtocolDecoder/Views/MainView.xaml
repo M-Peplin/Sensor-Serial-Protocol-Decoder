@@ -102,6 +102,13 @@
                 </StackPanel>
             </Grid>
         </GroupBox>
-        <StatusBar Grid.Row="6" Grid.ColumnSpan="2"></StatusBar>
+        <StatusBar Grid.Row="6" Grid.ColumnSpan="2">
+            <StatusBarItem>
+                <TextBlock Text="Port status:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding PortStatus, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>

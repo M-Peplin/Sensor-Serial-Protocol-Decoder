@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using SensorSerialProtocolDecoder.Services;
 
-namespace SensorSerialProtocolDecoder.Services
+namespace SensorSerialProtocolDecoder.Interfaces
 {
     public interface ICOMPortService
     {
-        SerialPort createSerialPort(string baudRate, string name);        
+        SerialPort createSerialPort(string baudRate, string name, Action<string> portStatus);
+
+        string checkPortStatus(SerialPort serialPort);
     }
 }
