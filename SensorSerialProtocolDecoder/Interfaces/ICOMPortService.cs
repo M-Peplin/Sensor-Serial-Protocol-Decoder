@@ -12,6 +12,12 @@ namespace SensorSerialProtocolDecoder.Interfaces
     {
         SerialPort createSerialPort(string baudRate, string name, Action<string> portStatus);
 
+        void closeSerialPort(SerialPort serialPort, Action<string> portStatus);
+
         string checkPortStatus(SerialPort serialPort);
+
+        void testSendMessage(SerialPort serialPort);
+
+        void testReadMessage(SerialPort serialPort, Action<string> receivedMessage);
     }
 }

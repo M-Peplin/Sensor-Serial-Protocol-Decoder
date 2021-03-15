@@ -41,14 +41,16 @@ namespace SensorSerialProtocolDecoder.ViewModels
             {
                 "115200",
                 "9600",
+                "38400",
             };
             //auto-select first of baud rates
             SelectedBaudRate = BaudRates.First();            
         }
 
         private SerialPort mySerialPort;
+        
         //Func<SerialPort, string> setPortStatus; 
-        Action<string> setPortStatus;
+        //Action<string> setPortStatus;
 
         #region Buttons
         private ICommand _echoRangeOn;
@@ -127,12 +129,14 @@ namespace SensorSerialProtocolDecoder.ViewModels
         {
             get
             {
+                if(_startListening == null)
+                {
+                    _startListening = new RelayCommand(
+                        param => _comPortService.testReadMessage(mySerialPort, value => PortMessage = value),
+                        param => true);
+                }
                 return _startListening;
-            }
-            set
-            {
-                SetValue(ref _startListening, value);
-            }
+            }            
         }
 
         private ICommand _saveToFile;
@@ -168,6 +172,12 @@ namespace SensorSerialProtocolDecoder.ViewModels
         {
             get
             {
+                if (_closePort == null)
+                {
+                    _closePort = new RelayCommand(
+                        param => _comPortService.closeSerialPort(mySerialPort, value => PortStatus = value),
+                        param => true);
+                }
                 return _closePort;
             }
             set
@@ -175,6 +185,25 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 SetValue(ref _closePort, value);
             }
         }
+
+        // sending test 
+
+        private ICommand _testSend;
+        public ICommand TestSend
+        {
+            get
+            {
+                if (_testSend == null)
+                {
+                    _testSend = new RelayCommand(
+                        param => _comPortService.testSendMessage(mySerialPort),
+                        param => true);
+                }
+                return _testSend;
+            }
+        }
+
+
         #endregion Buttons
 
         #region ComPorts
@@ -244,6 +273,19 @@ namespace SensorSerialProtocolDecoder.ViewModels
             set
             {
                 SetValue(ref _portStatus, value);
+            }
+        }
+
+        private string _portMessage;
+        public string PortMessage
+        {
+            get
+            {
+                return _portMessage;
+            }
+            set
+            {
+                SetValue(ref _portMessage, value);
             }
         }
 
