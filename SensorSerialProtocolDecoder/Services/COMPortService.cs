@@ -116,7 +116,8 @@ namespace SensorSerialProtocolDecoder.Services
             {
                 SerialPort sp = (SerialPort)sender;
                 string buffor = sp.ReadExisting();
-                dataIN += "\n " + buffor;
+                //dataIN += "\n " + buffor;
+                dataIN += buffor;
                 receivedMessage(dataIN);
             }
             //receivedMessage(serialPort.ReadExisting());

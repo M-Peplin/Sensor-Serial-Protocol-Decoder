@@ -9,5 +9,7 @@ namespace SensorSerialProtocolDecoder.Interfaces
     public interface IDecodeService
     {
         void decodeEnvelopeData(IAsyncResult result, string message);
+
+        void saveDataToFile(string data);
     }
 }

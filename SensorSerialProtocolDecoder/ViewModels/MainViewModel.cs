@@ -144,12 +144,14 @@ namespace SensorSerialProtocolDecoder.ViewModels
         {
             get
             {
+                if(_saveToFile == null)
+                {
+                    _saveToFile = new RelayCommand(
+                        param => _decodeService.saveDataToFile(PortMessage),
+                        param => true);
+                }
                 return _saveToFile;
-            }
-            set
-            {
-                SetValue(ref _saveToFile, value);
-            }
+            }           
         }
 
         private ICommand _openPort;

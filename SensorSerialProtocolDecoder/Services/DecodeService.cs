@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Win32;
 using SensorSerialProtocolDecoder.Interfaces;
 
 namespace SensorSerialProtocolDecoder.Services
@@ -30,8 +32,21 @@ namespace SensorSerialProtocolDecoder.Services
             catch (ObjectDisposedException)
             {
                 MessageBox.Show("Something didn't work");
+            }            
+        }
+
+        public void saveDataToFile(string data)
+        {            
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.RestoreDirectory = true;
+
+            {
+                if(saveFileDialog.ShowDialog() == true)
+                {
+                    File.WriteAllText(saveFileDialog.FileName, data);
+                }
             }
-            
         }
     }
 }
