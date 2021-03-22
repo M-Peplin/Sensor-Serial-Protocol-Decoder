@@ -36,19 +36,23 @@ namespace SensorSerialProtocolDecoder.ViewModels
             }
             //Auto-select first avalible port on list
             SelectedComPort = ComPorts.FirstOrDefault();
+            SelectedComPort2 = ComPorts.FirstOrDefault();
             //add avalible baudrate options
             BaudRates = new ObservableCollection<string>()
             {
                 "115200",
                 "9600",
                 "38400",
+                "4800",
+                "921600",
             };
             //auto-select first of baud rates
-            SelectedBaudRate = BaudRates.First();            
+            SelectedBaudRate = BaudRates.First();
+            SelectedBaudRate2 = BaudRates.First();
         }
 
         private SerialPort mySerialPort;
-        
+        private SerialPort mySerialPort2;
         //Func<SerialPort, string> setPortStatus; 
         //Action<string> setPortStatus;
 
@@ -132,7 +136,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if(_startListening == null)
                 {
                     _startListening = new RelayCommand(
-                        param => _comPortService.testReadMessage(mySerialPort, value => PortMessage = value),
+                        param => _comPortService.ReadMessage(mySerialPort2, value => PortMessage = value),
                         param => true);
                 }
                 return _startListening;
@@ -188,8 +192,44 @@ namespace SensorSerialProtocolDecoder.ViewModels
             }
         }
 
-        // sending test 
+        // port 2 
 
+        private ICommand _openPort2;
+        public ICommand OpenPort2
+        {
+            get
+            {
+                if (_openPort2 == null)
+                {
+                    _openPort2 = new RelayCommand(
+                        param => mySerialPort2 = _comPortService.createSerialPort(SelectedBaudRate2, SelectedComPort2, value => PortStatus2 = value),
+                        param => true);
+                }
+                return _openPort2;
+            }
+        }
+
+        private ICommand _closePort2;
+        public ICommand ClosePort2
+        {
+            get
+            {
+                if (_closePort2 == null)
+                {
+                    _closePort2 = new RelayCommand(
+                        param => _comPortService.closeSerialPort(mySerialPort2, value => PortStatus2 = value),
+                        param => true);
+                }
+                return _closePort2;
+            }
+            set
+            {
+                SetValue(ref _closePort2, value);
+            }
+        }
+
+        // sending test 
+        /*
         private ICommand _testSend;
         public ICommand TestSend
         {
@@ -204,7 +244,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 return _testSend;
             }
         }
-
+        */
 
         #endregion Buttons
 
@@ -264,6 +304,19 @@ namespace SensorSerialProtocolDecoder.ViewModels
             }
         }
 
+        private string _selectedComPort2;
+        public string SelectedComPort2
+        {
+            get
+            {
+                return _selectedComPort2;
+            }
+            set
+            {
+                _selectedComPort2 = value;
+            }
+        }
+
         private string _portStatus = "";
 
         public string PortStatus
@@ -277,6 +330,22 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 SetValue(ref _portStatus, value);
             }
         }
+
+        // second port
+        private string _portStatus2 = "";
+
+        public string PortStatus2
+        {
+            get
+            {
+                return _portStatus2;
+            }
+            set
+            {
+                SetValue(ref _portStatus2, value);
+            }
+        }
+
 
         private string _portMessage;
         public string PortMessage
@@ -319,6 +388,21 @@ namespace SensorSerialProtocolDecoder.ViewModels
             set
             {
                 _selectedBaudRate = value;
+            }
+        }
+
+        // port 2 
+        private string _selectedBaudRate2;
+
+        public string SelectedBaudRate2
+        {
+            get
+            {
+                return _selectedBaudRate2;
+            }
+            set
+            {
+                _selectedBaudRate2 = value;
             }
         }
         #endregion BaudRates

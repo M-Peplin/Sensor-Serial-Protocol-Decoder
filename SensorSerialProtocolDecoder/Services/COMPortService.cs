@@ -60,15 +60,15 @@ namespace SensorSerialProtocolDecoder.Services
         {
             if(serialPort == null)
             {
-                return "closed";
+                return (serialPort.PortName + " closed");
             }
             else if (serialPort.IsOpen)
             {
-                return "open";
+                return (serialPort.PortName + " open");
             }
             else
             {
-                return "closed";
+                return (serialPort.PortName + " closed");
             }
         }
 
@@ -89,25 +89,10 @@ namespace SensorSerialProtocolDecoder.Services
             string status = checkPortStatus(serialPort);
             portStatus(status);            
         }
-
-        public void testSendMessage(SerialPort serialPort)
-        {
-            if(serialPort.IsOpen)
-            {
-                try
-                {
-                    //serialPort.WriteLine("Testowy message");
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
+        
 
         static string dataIN;        
-        public void testReadMessage(SerialPort serialPort, Action<string> receivedMessage)
+        public void ReadMessage(SerialPort serialPort, Action<string> receivedMessage)
         {     
             serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
             //string indata = "";

@@ -84,23 +84,42 @@
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel>                    
-                    <Label Content="Port:" Style="{StaticResource StandardLabel}"></Label>
+                <StackPanel Grid.RowSpan="3">                    
+                    <Label Content="Port 1:" Style="{StaticResource StandardLabel}"></Label>
                     <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
                               ItemsSource="{Binding Path=ComPorts}"
                               SelectedItem="{Binding Path=SelectedComPort}"                                                            
                               ></ComboBox>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0" Command="{Binding Path=OpenPort}"></Button>
-                        <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0" Command="{Binding Path=ClosePort}"></Button>
-                    </StackPanel>
                     <Label Content="Baud rate:" Style="{StaticResource StandardLabel}"></Label>
                     <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
                               ItemsSource="{Binding Path=BaudRates}"
                               SelectedItem="{Binding Path=SelectedBaudRate}"                              
                               ></ComboBox>
-                    <Button Content="TestSend" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0" Command="{Binding Path=TestSend}"></Button>
-                </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0" Command="{Binding Path=OpenPort}"></Button>
+                        <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0" Command="{Binding Path=ClosePort}"></Button>
+                    </StackPanel>
+                    <Label Content="Port 2:" Style="{StaticResource StandardLabel}" Margin="0,30,0,0"></Label>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
+                              ItemsSource="{Binding Path=ComPorts}"
+                              SelectedItem="{Binding Path=SelectedComPort2}"                                                            
+                              ></ComboBox>
+                    <Label Content="Baud rate:" Style="{StaticResource StandardLabel}"></Label>
+                    <ComboBox Height="40" Style="{StaticResource ComboBoxFlatStyle}"
+                              ItemsSource="{Binding Path=BaudRates}"
+                              SelectedItem="{Binding Path=SelectedBaudRate2}"                              
+                              ></ComboBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Open" Style="{StaticResource Small button}" Height="30" Width="70" Margin="0,10,15,0" Command="{Binding Path=OpenPort2}"></Button>
+                        <Button Content="Close" Style="{StaticResource Small button}" Height="30" Width="70" Margin="15,10,0,0" Command="{Binding Path=ClosePort2}"></Button>
+                    </StackPanel>
+                    <Label Content="Message type:" Style="{StaticResource StandardLabel}" Margin="0,20,0,0"></Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Port 1" Style="{StaticResource Small button}" Height="30" Width="74" Margin="0,10,1,0"></Button>
+                        <Button Content="Port 2" Style="{StaticResource Small button}" Height="30" Width="74" Margin="0,10,1,0"></Button>
+                        <Button Content="Combined" Style="{StaticResource Small button}" Height="30" Width="76" Margin="0,10,0,0"></Button>
+                    </StackPanel>
+                </StackPanel>                
             </Grid>
         </GroupBox>
         <StatusBar Grid.Row="6" Grid.ColumnSpan="2">
@@ -109,6 +128,9 @@
             </StatusBarItem>
             <StatusBarItem>
                 <TextBlock Text="{Binding PortStatus, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Margin="10,0,0,0">
+                <TextBlock Text="{Binding PortStatus2, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

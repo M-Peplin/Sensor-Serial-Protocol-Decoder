@@ -14,10 +14,8 @@ namespace SensorSerialProtocolDecoder.Interfaces
 
         void closeSerialPort(SerialPort serialPort, Action<string> portStatus);
 
-        string checkPortStatus(SerialPort serialPort);
+        string checkPortStatus(SerialPort serialPort);        
 
-        void testSendMessage(SerialPort serialPort);
-
-        void testReadMessage(SerialPort serialPort, Action<string> receivedMessage);
+        void ReadMessage(SerialPort serialPort, Action<string> receivedMessage);
     }
 }
