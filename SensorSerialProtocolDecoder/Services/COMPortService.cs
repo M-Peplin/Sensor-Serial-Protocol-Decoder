@@ -91,7 +91,7 @@ namespace SensorSerialProtocolDecoder.Services
         }
         
 
-        static string dataIN;        
+        static string dataIN, dataINport1, dataINport2;        
         public void ReadMessage(SerialPort serialPort, Action<string> receivedMessage)
         {     
             serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
@@ -106,9 +106,35 @@ namespace SensorSerialProtocolDecoder.Services
                 receivedMessage(dataIN);
             }
             //receivedMessage(serialPort.ReadExisting());
-        }        
-        
-       
-                       
+        }
+
+        public void ReadMessages(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2)
+        {
+            serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
+            serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);
+            //string indata = "";
+
+            void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
+            {
+                SerialPort sp = (SerialPort)sender;
+                string buffor = sp.ReadExisting();
+                //dataIN += "\n " + buffor;
+                dataINport1 += buffor;
+                receivedMessage1(dataINport1);
+            }
+
+            void DataReceivedHandler2(object sender, SerialDataReceivedEventArgs e)
+            {
+                SerialPort sp = (SerialPort)sender;
+                string buffor = sp.ReadExisting();
+                //dataIN += "\n " + buffor;
+                dataINport2 += buffor;
+                receivedMessage2(dataINport2);
+            }
+            //receivedMessage(serialPort.ReadExisting());
+        }
+
+
+
     }
 }

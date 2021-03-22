@@ -136,7 +136,8 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if(_startListening == null)
                 {
                     _startListening = new RelayCommand(
-                        param => _comPortService.ReadMessage(mySerialPort2, value => PortMessage = value),
+                        //param => _comPortService.ReadMessage(mySerialPort2, value => PortMessage = value),
+                        param => _comPortService.ReadMessages(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value),
                         param => true);
                 }
                 return _startListening;
@@ -227,6 +228,22 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 SetValue(ref _closePort2, value);
             }
         }
+
+        private ICommand _combinedMessageBtn;
+        public ICommand CombinedMessageBtn
+        {
+            get
+            {
+                if (_combinedMessageBtn == null)
+                {
+                    _combinedMessageBtn = new RelayCommand(
+                        param => PortMessage = _decodeService.showMessage(3, Port1Message, Port2Message),
+                        param => true);
+                }
+                return _combinedMessageBtn;
+            }
+        }
+
 
         // sending test 
         /*
@@ -357,6 +374,32 @@ namespace SensorSerialProtocolDecoder.ViewModels
             set
             {
                 SetValue(ref _portMessage, value);
+            }
+        }
+
+        private string _port1Message;
+        public string Port1Message
+        {
+            get
+            {
+                return _port1Message;
+            }
+            set
+            {
+                SetValue(ref _port1Message, value);
+            }
+        }
+
+        private string _port2Message;
+        public string Port2Message
+        {
+            get
+            {
+                return _port2Message;
+            }
+            set
+            {
+                SetValue(ref _port2Message, value);
             }
         }
 

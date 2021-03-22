@@ -11,5 +11,7 @@ namespace SensorSerialProtocolDecoder.Interfaces
         void decodeEnvelopeData(IAsyncResult result, string message);
 
         void saveDataToFile(string data);
+
+        string showMessage(int messageMode, string portMessage1, string portMessage2);
     }
 }

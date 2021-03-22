@@ -48,5 +48,37 @@ namespace SensorSerialProtocolDecoder.Services
                 }
             }
         }
+
+        public string showMessage(int messageMode, string portMessage1, string portMessage2)
+        {
+            //message modes 1-3;
+            if(messageMode == 1)
+            {
+                return portMessage1;
+            }
+            else if(messageMode == 2)
+            {
+                return portMessage2;
+            }
+            else if(messageMode == 3)
+            {
+                return combineMessages(portMessage1, portMessage2);
+            }
+            else
+            {
+                return "Error - please enter valid message mode (1-3)";
+            }
+        }
+
+        public string combineMessages(string message1, string message2)
+        {
+            string lastLineMessage1, lastLineMessage2;
+            lastLineMessage1 = message1.Split('\n').Last();
+            lastLineMessage2 = message2.Split('\n').Last();
+            string combinedMessage = "";
+            //return combinedMessage = lastLineMessage1 + "\n" + lastLineMessage2;
+            return message1 + message2;
+        }
+
     }
 }

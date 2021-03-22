@@ -17,5 +17,6 @@ namespace SensorSerialProtocolDecoder.Interfaces
         string checkPortStatus(SerialPort serialPort);        
 
         void ReadMessage(SerialPort serialPort, Action<string> receivedMessage);
+        void ReadMessages(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2);
     }
 }
