@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -14,6 +15,11 @@ namespace SensorSerialProtocolDecoder.Services
 {
     class DecodeService : IDecodeService
     {
+        private readonly ICOMPortService _comPortService;
+        public DecodeService(ICOMPortService comPortService)
+        {
+            this._comPortService = comPortService;
+        }
 
         byte[] bytes;
         private static UdpClient listener;
@@ -49,6 +55,12 @@ namespace SensorSerialProtocolDecoder.Services
             }
         }
 
+        public void recordDataToFile(string data)
+        {            
+            string path = @"D:\Sonda\TestData";             
+            File.AppendAllText(path, data);
+        }
+
         public string showMessage(int messageMode, string portMessage1, string portMessage2)
         {
             //message modes 1-3;
@@ -70,11 +82,29 @@ namespace SensorSerialProtocolDecoder.Services
             }
         }
 
+        public void showMessages(int messageMode, string portMessage1, string portMessage2, Action<string> portMessageReturned,
+            Action<SerialPort, SerialPort, Action<string>, Action<string>> readingData)
+        {
+            //message modes 1-3;
+            if (messageMode == 1)
+            {
+                portMessageReturned(portMessage1);                
+            }
+            else if (messageMode == 2)
+            {
+                portMessageReturned(portMessage2);
+            }
+            else if (messageMode == 3)
+            {
+                portMessageReturned(combineMessages(portMessage1, portMessage2));
+            }            
+        }
+
         public string combineMessages(string message1, string message2)
         {
             string lastLineMessage1, lastLineMessage2;
-            lastLineMessage1 = message1.Split('\n').Last();
-            lastLineMessage2 = message2.Split('\n').Last();
+            //lastLineMessage1 = message1.Split('\n').Last();
+            //lastLineMessage2 = message2.Split('\n').Last();
             string combinedMessage = "";
             //return combinedMessage = lastLineMessage1 + "\n" + lastLineMessage2;
             return message1 + message2;

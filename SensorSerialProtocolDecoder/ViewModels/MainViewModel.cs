@@ -136,7 +136,7 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if(_startListening == null)
                 {
                     _startListening = new RelayCommand(
-                        //param => _comPortService.ReadMessage(mySerialPort2, value => PortMessage = value),
+                        //param => _comPortService.ReadMessage(mySerialPort, value => PortMessage = value),
                         param => _comPortService.ReadMessages(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value),
                         param => true);
                 }
@@ -157,6 +157,21 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 }
                 return _saveToFile;
             }           
+        }
+
+        private ICommand _recordFile;
+        public ICommand RecordFile
+        {
+            get
+            {
+                if(_recordFile == null)
+                {
+                    _recordFile = new RelayCommand(
+                        p => _decodeService.recordDataToFile(PortMessage),
+                        p => true);
+                }
+                return _recordFile;
+            }
         }
 
         private ICommand _openPort;
@@ -237,7 +252,10 @@ namespace SensorSerialProtocolDecoder.ViewModels
                 if (_combinedMessageBtn == null)
                 {
                     _combinedMessageBtn = new RelayCommand(
-                        param => PortMessage = _decodeService.showMessage(3, Port1Message, Port2Message),
+                        //param => PortMessage = _decodeService.showMessage(3, Port1Message, Port2Message),
+                        //param => _decodeService.showMessages(3, Port1Message, Port2Message, value => PortMessage = value),
+                        //param => _comPortService.ReadCombinedMessage(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value, value => PortMessage = value),
+                        param => _comPortService.ReadCombinedMessage(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value, value => PortMessage = value),
                         param => true);
                 }
                 return _combinedMessageBtn;

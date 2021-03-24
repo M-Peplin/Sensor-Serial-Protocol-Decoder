@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,11 @@ namespace SensorSerialProtocolDecoder.Interfaces
 
         void saveDataToFile(string data);
 
+        void recordDataToFile(string data);
+
         string showMessage(int messageMode, string portMessage1, string portMessage2);
+
+        void showMessages(int messageMode, string portMessage1, string portMessage2, Action<string> portMessageReturned,
+            Action<SerialPort, SerialPort, Action<string>, Action<string>> readingData);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,9 @@ using SensorSerialProtocolDecoder.Interfaces;
 namespace SensorSerialProtocolDecoder.Services
 {
     public class COMPortService : ICOMPortService
-    {    
-
+    {
+        public delegate void OnDataRead();
+        public event OnDataRead dataRead;
         public SerialPort createSerialPort(string baudRate, string name, Action<string> portStatus)
         {
             SerialPort serialPort = new SerialPort(name);
@@ -110,9 +112,10 @@ namespace SensorSerialProtocolDecoder.Services
 
         public void ReadMessages(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2)
         {
-            serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
-            serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);
-            //string indata = "";
+            if(serialPort1 != null)
+                serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
+            if (serialPort2 != null)
+                serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);            
 
             void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
             {
@@ -130,11 +133,60 @@ namespace SensorSerialProtocolDecoder.Services
                 //dataIN += "\n " + buffor;
                 dataINport2 += buffor;
                 receivedMessage2(dataINport2);
+            }            
+        }
+
+        public delegate void CombinedMessageEventHandler();
+        public event CombinedMessageEventHandler OnCombineMessage;
+        string combinedMessageString;
+
+        //temporary - deadline
+        string path = @"D:\Sonda\TestData.txt";
+        //DateTime dt = new DateTime();
+
+
+        public void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage)
+        {
+            if (serialPort1 != null)
+                serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
+            if (serialPort2 != null)
+                serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);
+
+            //temporary file writing - deadline - this has to be moved somewhere else and improved
+ 
+            //string indata = "";            
+
+            void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
+            {
+                SerialPort sp = (SerialPort)sender;
+                string buffor = sp.ReadExisting();
+                //dataIN += "\n " + buffor;
+                dataINport1 += buffor;
+                //combinedMessageString += buffor;
+                // temporary
+                combinedMessageString += buffor;
+                receivedMessage1(dataINport1);
+                combinedMessage(combinedMessageString); 
+                
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(Convert.ToString(DateTime.Now));
+                    sw.Write(buffor);
+                }
+            }
+
+            void DataReceivedHandler2(object sender, SerialDataReceivedEventArgs e)
+            {
+                SerialPort sp = (SerialPort)sender;
+                string buffor = sp.ReadExisting();
+                //dataIN += "\n " + buffor;
+                dataINport2 += buffor;
+                combinedMessageString += buffor;
+                receivedMessage2(dataINport2);
+                combinedMessage(combinedMessageString);                
             }
             //receivedMessage(serialPort.ReadExisting());
         }
-
-
 
     }
 }
