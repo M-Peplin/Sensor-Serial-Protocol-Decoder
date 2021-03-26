@@ -62,7 +62,7 @@ namespace SensorSerialProtocolDecoder.Services
         {
             if(serialPort == null)
             {
-                return (serialPort.PortName + " closed");
+                return ("Port closed");
             }
             else if (serialPort.IsOpen)
             {
@@ -76,16 +76,31 @@ namespace SensorSerialProtocolDecoder.Services
 
         public void closeSerialPort(SerialPort serialPort, Action<string> portStatus)
         {
-            if(serialPort.IsOpen)
+            try
             {
-                try
+                if (serialPort != null && serialPort.IsOpen)
                 {
-                    serialPort.Close();
+                    try
+                    {
+                        serialPort.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error");
+                    }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show("Error");
+                    MessageBox.Show("Serial port is not opened!");
                 }
+            }
+            catch (NullReferenceException e)
+            {                
+                MessageBox.Show(e.Message.ToString());
+            }
+            finally
+            {
+                serialPort?.Dispose();
             }
             
             string status = checkPortStatus(serialPort);
@@ -143,7 +158,9 @@ namespace SensorSerialProtocolDecoder.Services
         //temporary - deadline
         string path = @"D:\Sonda\TestData.txt";
         //DateTime dt = new DateTime();
-
+        int counter = 0, counterModulo = 0;
+        string pathAdditive;
+        
 
         public void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage)
         {
@@ -158,6 +175,7 @@ namespace SensorSerialProtocolDecoder.Services
 
             void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
             {
+                pathAdditive = $@"D:\Sonda\TestData{counterModulo.ToString()}.txt";
                 SerialPort sp = (SerialPort)sender;
                 string buffor = sp.ReadExisting();
                 //dataIN += "\n " + buffor;
@@ -166,11 +184,24 @@ namespace SensorSerialProtocolDecoder.Services
                 // temporary
                 combinedMessageString += buffor;
                 receivedMessage1(dataINport1);
-                combinedMessage(combinedMessageString); 
-                
-                using (StreamWriter sw = File.AppendText(path))
+                combinedMessage(combinedMessageString);
+                                
+                using (StreamWriter sw = File.AppendText(pathAdditive))
                 {
-                    sw.WriteLine(Convert.ToString(DateTime.Now));
+                    
+                  //  sw.WriteLine(Convert.ToString(DateTime.Now));
+
+                    
+                   // int? position = buffor.LastIndexOf("\r");
+                    if(buffor.Contains("TS"))
+                    {
+                        buffor = " *** " + Convert.ToString(DateTime.Now) + " *** \n" + buffor;
+                        counter += 1;
+                        if(counter % 5 == 0)
+                        {
+                            counterModulo = counterModulo += 1;
+                        }
+                    }
                     sw.Write(buffor);
                 }
             }
