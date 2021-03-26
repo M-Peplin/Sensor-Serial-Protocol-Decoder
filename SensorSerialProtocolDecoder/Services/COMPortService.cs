@@ -175,14 +175,14 @@ namespace SensorSerialProtocolDecoder.Services
 
             void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
             {
-                pathAdditive = $@"D:\Sonda\TestData{counterModulo.ToString()}.txt";
+                pathAdditive = $@"Data\Data{counterModulo.ToString()}.txt";
                 SerialPort sp = (SerialPort)sender;
                 string buffor = sp.ReadExisting();
                 //dataIN += "\n " + buffor;
                 dataINport1 += buffor;
                 //combinedMessageString += buffor;
                 // temporary
-                combinedMessageString += buffor;
+                combinedMessageString = buffor;
                 receivedMessage1(dataINport1);
                 combinedMessage(combinedMessageString);
                                 
@@ -197,7 +197,7 @@ namespace SensorSerialProtocolDecoder.Services
                     {
                         buffor = " *** " + Convert.ToString(DateTime.Now) + " *** \n" + buffor;
                         counter += 1;
-                        if(counter % 5 == 0)
+                        if(counter % 150 == 0)
                         {
                             counterModulo = counterModulo += 1;
                         }
