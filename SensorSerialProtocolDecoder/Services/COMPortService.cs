@@ -170,12 +170,15 @@ namespace SensorSerialProtocolDecoder.Services
                 serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);
 
             //temporary file writing - deadline - this has to be moved somewhere else and improved
- 
-            //string indata = "";            
+
+            //string indata = "";
+            CheckDirectoryExists($@"Data");
+            pathAdditive = CheckFileExists(pathAdditive);
 
             void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
             {
                 pathAdditive = $@"Data\Data{counterModulo.ToString()}.txt";
+                //pathAdditive = CheckFileExist(pathAdditive);
                 SerialPort sp = (SerialPort)sender;
                 string buffor = sp.ReadExisting();
                 //dataIN += "\n " + buffor;
@@ -214,9 +217,28 @@ namespace SensorSerialProtocolDecoder.Services
                 dataINport2 += buffor;
                 combinedMessageString += buffor;
                 receivedMessage2(dataINport2);
-                combinedMessage(combinedMessageString);                
+                combinedMessage(combinedMessageString);
             }
             //receivedMessage(serialPort.ReadExisting());
+        }
+
+        public string CheckFileExists(string path)
+        {
+            while(File.Exists(path))
+            {
+                counterModulo += 1;
+                path = $@"Data\Data{counterModulo.ToString()}.txt";
+            }
+
+            return path;
+        }
+
+        public void CheckDirectoryExists(string path)
+        {
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
     }
