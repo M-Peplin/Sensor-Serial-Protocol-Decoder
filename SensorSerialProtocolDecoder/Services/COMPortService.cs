@@ -162,7 +162,8 @@ namespace SensorSerialProtocolDecoder.Services
         string pathAdditive;
         
 
-        public void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage)
+        public void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, 
+            Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage, bool recording=true)
         {
             if (serialPort1 != null)
                 serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
@@ -177,35 +178,19 @@ namespace SensorSerialProtocolDecoder.Services
 
             void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
             {
-                pathAdditive = $@"Data\Data{counterModulo.ToString()}.txt";
-                //pathAdditive = CheckFileExist(pathAdditive);
+                pathAdditive = $@"Data\Data{counterModulo.ToString()}.txt";                
                 SerialPort sp = (SerialPort)sender;
-                string buffor = sp.ReadExisting();
-                //dataIN += "\n " + buffor;
+                string buffor = sp.ReadExisting();                
                 dataINport1 += buffor;
-                //combinedMessageString += buffor;
-                // temporary
+                dataINport1 = CutStringIfTooLong(dataINport1, buffor);
                 combinedMessageString = buffor;
                 receivedMessage1(dataINport1);
-                combinedMessage(combinedMessageString);
-                                
-                using (StreamWriter sw = File.AppendText(pathAdditive))
-                {
-                    
-                  //  sw.WriteLine(Convert.ToString(DateTime.Now));
 
-                    
-                   // int? position = buffor.LastIndexOf("\r");
-                    if(buffor.Contains("TS"))
-                    {
-                        buffor = " *** " + Convert.ToString(DateTime.Now) + " *** \n" + buffor;
-                        counter += 1;
-                        if(counter % 150 == 0)
-                        {
-                            counterModulo = counterModulo += 1;
-                        }
-                    }
-                    sw.Write(buffor);
+                combinedMessage(combinedMessageString);
+
+                if (recording == true)
+                {
+                    recordStringToFile(buffor);
                 }
             }
 
@@ -241,5 +226,36 @@ namespace SensorSerialProtocolDecoder.Services
             }
         }
 
+        public string addTimeToString(string str)
+        {            
+            str = $" *** {Convert.ToString(DateTime.Now)} *** \n{str}";
+            return str;
+        }
+
+        public void recordStringToFile(string buffor)
+        {
+            using (StreamWriter sw = File.AppendText(pathAdditive))
+            {
+                if (buffor.Contains("TS"))
+                {
+                    buffor = addTimeToString(buffor);
+                    counter += 1;
+                    if (counter % 150 == 0)
+                    {
+                        counterModulo = counterModulo += 1;
+                    }
+                }
+                sw.Write(buffor);
+            }
+        }
+
+        public string CutStringIfTooLong(string str, string buffor)
+        {
+            if (str.Length > 15000)
+            {
+                str.Remove(0, buffor.Length);
+            }
+            return str;
+        }
     }
 }

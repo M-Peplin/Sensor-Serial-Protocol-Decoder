@@ -19,6 +19,6 @@ namespace SensorSerialProtocolDecoder.Interfaces
         void ReadMessage(SerialPort serialPort, Action<string> receivedMessage);
         void ReadMessages(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2);
 
-        void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage);
+        void ReadCombinedMessage(SerialPort serialPort1, SerialPort serialPort2, Action<string> receivedMessage1, Action<string> receivedMessage2, Action<string> combinedMessage, bool recording=true);
     }
 }
