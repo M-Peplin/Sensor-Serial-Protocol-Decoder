@@ -66,7 +66,7 @@
                 <Button Content="Start listening" Grid.Row="0" Grid.Column="0" Style="{StaticResource Standard button}" Width="150" Height="40" Command="{Binding Path=StartListening}"></Button>
                 <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="0">
                     <Button Content="Save to file" Grid.Row="0" Grid.Column="3" Style="{StaticResource Standard button}" Width="150" Height="35" Command="{Binding Path=SaveToFile}" Margin="0,0,0,3"></Button>
-                    <Button Content="Record" Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard button}" Width="150" Height="35" Command="{Binding Path=RecordToFile}" Margin="0,3,0,0"></Button>
+                    <ToggleButton Content="Enable recording" Grid.Row="0" Grid.Column="2" Style="{StaticResource Standard toggle button}" Width="150" Height="35" IsChecked="{Binding RecordToFile}" Margin="0,3,0,0"></ToggleButton>
                 </StackPanel>                                
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="20">
                     <TextBox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="80"></TextBox>

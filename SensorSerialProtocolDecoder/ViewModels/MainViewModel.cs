@@ -174,6 +174,19 @@ namespace SensorSerialProtocolDecoder.ViewModels
             }
         }
 
+        private bool _recordToFile;
+        public bool RecordToFile
+        {
+            get
+            {
+                return _recordToFile;
+            }
+            set
+            {
+                SetValue(ref _recordToFile, value);
+            }
+        }
+
         private ICommand _openPort;
         public ICommand OpenPort
         {
@@ -255,7 +268,8 @@ namespace SensorSerialProtocolDecoder.ViewModels
                         //param => PortMessage = _decodeService.showMessage(3, Port1Message, Port2Message),
                         //param => _decodeService.showMessages(3, Port1Message, Port2Message, value => PortMessage = value),
                         //param => _comPortService.ReadCombinedMessage(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value, value => PortMessage = value),
-                        param => _comPortService.ReadCombinedMessage(mySerialPort, mySerialPort2, value => Port1Message = value, value => Port2Message = value, value => PortMessage = value),
+                        param => _comPortService.ReadCombinedMessage(mySerialPort, mySerialPort2, value => Port1Message = value,
+                        value => Port2Message = value, value => PortMessage = value, RecordToFile),
                         param => true);
                 }
                 return _combinedMessageBtn;
