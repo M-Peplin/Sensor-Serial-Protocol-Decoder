@@ -19,5 +19,7 @@ namespace SensorSerialProtocolDecoder.Interfaces
 
         void showMessages(int messageMode, string portMessage1, string portMessage2, Action<string> portMessageReturned,
             Action<SerialPort, SerialPort, Action<string>, Action<string>> readingData);
+
+        void LoadFileToDecode();
     }
 }

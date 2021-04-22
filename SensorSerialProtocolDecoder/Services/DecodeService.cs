@@ -110,5 +110,19 @@ namespace SensorSerialProtocolDecoder.Services
             return message1 + message2;
         }
 
+        public void LoadFileToDecode()
+        {
+            string path = $@"Data\Data1.txt";
+            if(File.Exists(path))
+            {
+                string data = File.ReadAllText(path);
+            }
+            else
+            {
+                MessageBox.Show("No files found!");
+            }
+            
+        }
+
     }
 }

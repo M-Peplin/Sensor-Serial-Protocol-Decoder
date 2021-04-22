@@ -48,11 +48,12 @@ namespace SensorSerialProtocolDecoder.ViewModels
             };
             //auto-select first of baud rates
             SelectedBaudRate = BaudRates.First();
-            SelectedBaudRate2 = BaudRates.First();
+            SelectedBaudRate2 = BaudRates.First();            
         }
 
         private SerialPort mySerialPort;
         private SerialPort mySerialPort2;
+        private bool listeningIsOn = false;
         //Func<SerialPort, string> setPortStatus; 
         //Action<string> setPortStatus;
 
@@ -184,6 +185,11 @@ namespace SensorSerialProtocolDecoder.ViewModels
             set
             {
                 SetValue(ref _recordToFile, value);
+                if(listeningIsOn == true)
+                {
+                    //to be done - execute CombinedMessageBtn
+                    CombinedMessageBtn.Execute(null);
+                }
             }
         }
 
