@@ -23,5 +23,7 @@ namespace SensorSerialProtocolDecoder.Interfaces
         void LoadFileToDecode(string path, ref string data);
 
         void LoadAllDataFiles();
+
+        void Decode(string data);
     }
 }
