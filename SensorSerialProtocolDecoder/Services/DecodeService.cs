@@ -136,7 +136,7 @@ namespace SensorSerialProtocolDecoder.Services
         public void Decode(string data)
         {
             int index = 0;
-            string[] splittedData = new string[2800];
+            string[] splittedData = new string[2800];            
             int j = 0;
             for(int i = 0; i< data.Length; i++)
             {
@@ -150,6 +150,63 @@ namespace SensorSerialProtocolDecoder.Services
                     j++;
                 }
             }
+        }
+
+        public void Decode2(string data)
+        {
+            int index = 0;
+            string dataToAdd = "";
+            List<string> splittedData = new List<string>();
+            int j = 0;
+            for(int i = 0; i < data.Length; i++)
+            {
+                dataToAdd = "";
+                while(!data[i].Equals(',') && (i < data.Length - 1))
+                {
+                    dataToAdd = dataToAdd + $"{ data[i] }";                    
+                    i++;
+                }
+                splittedData.Add(dataToAdd);
+
+                if (data[i].Equals(','))
+                {                    
+                    j++;
+                }
+            }
+            ToDecimal(splittedData);
+        }
+
+        public void ToDecimal(List<string> data)
+        {
+            int? buffor = null;
+            for(int i = 0; i < data.Count; i++)
+            {
+                if(i > 3 && i != 7)
+                {
+                    try
+                    {
+                        //buffor = Convert.ToInt32(data.ElementAt(i), 16);
+                        buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
+                    }
+                    catch
+                    {
+
+                    }
+                }                
+
+                if(buffor != null)
+                {
+                    data[i] = buffor.ToString();
+                }                
+            }
+            string combinedData = CombinedString(data);
+        }
+
+        public string CombinedString(List<string> data)
+        {
+            string combinedData = "";
+            combinedData = string.Join(",", data);
+            return combinedData;
         }
 
     }
