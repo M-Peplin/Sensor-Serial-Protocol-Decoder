@@ -26,6 +26,6 @@ namespace SensorSerialProtocolDecoder.Interfaces
 
         void Decode(string data);
 
-        void Decode2(string data);
+        void Decode2();
     }
 }
