@@ -133,7 +133,7 @@ namespace SensorSerialProtocolDecoder.Services
             }
 
         }
-        string dane = "TS,   3008,    0,1,03,02,150, b0,05,22,31,15,38,11,3c,11,41,11,44,OFF0, 00,ff,ec,ae,a7,a2,b0,92,69,71,71,85,5f,57,6c,64,53,3f,60,5d,56,60,47,40,3d,4a,42,4b,3e,30,3c,1b,43,2a,25,2c,17,1e,25,24,10,23,34,1a,0e,17,0e,0f,15,0a,22,19,0f,1a,0b,0b,06,15,04,03,03,11,06,00,0d,00,11,03,03,11,05,07,05,01,05,03,02,0e,00,02,02,01,00,0a,05,01,02,02,01,02,00,05,00,01,02,09,01,0b,03,00,03,01,00,02,03,00,01,01,00,09,00,01,05,01,00,00,00,02,00,02,03,08,00,05,06,00,01,00,04,06,00,00,02,00,08,07,01,06,04,00,00,08,09,00,00,05,00,05,00,00,01,03,01,01,03,03,00,01,00,01,00,00,00,0a,08,00,00,01,00,06,03,00,01,01,01,01,03,00,00,03,04,00,02,00,0d,03,00,07,00,02,00,02,00,01,00,00,00,00,00,03,09,03,00,00,01,01,00,00,00,01,01,00,03,0d,00,00,00,01,00,01,00,01,01,03,01,01,04,01,01,02,05,03,00,03,00,00,07,01,0c,01,02,00,00,00,04,04,07,00,00,09,07,00,08,07,00,00,02,01,00,05,00,08,03,00,05,02,00,03,04,05,0d,09,00,00,03,01,02,03,01,00,02,00,00,02,00,03,00,00,01,01,00,04,03,00,01,00,03,01,05,02,01,09,04,01,00,00,10,00,01,05,00,00,00,00,01,00,01,00,00,00,01,00,0b,04,02,06,01,00,00,00,02,07,0b,04,01,00,08,03,00,01,02,02,02,00,00,02,00,01,00,00,00,00,00,00,00,05,00,00,02,00,00,00,00,01,00,00,01,01,01,07,04,02,00,04,00,01,00,06,00,01,01,05,00,00,03,07,06,00,01,01,01,03,00,01,00,00,05,06,00,02,00,00,04,01,01,00,03,00,03,05,04,09,00,03,01,06,02,00,04,01,04,01,03,00,01,01,00,00,01,00,06,01,00,00,02,00,00,00,03,02,05,00,00,00,00,00,06,00,02,0b,06,00,01,00,03,00,00,02,00,00,01,05,00,02,0a,00,00,04,00,03,00,04,05,02,04,01,00,00,00,06,06,03,00,03,02,00,00,01,04,00,06,00,00,01,00,00,01,0b,01,01,00,01,00,0a,00,00,00,00,01,03,02,00,04,03,01,00,01,00,04,07,00,00,00,01,00,07,01,02,00,01,00,04,00,00,00,04,01,03,03,01,04,02,01,00,00,02,02,00,05,04,00,01,00,00,08,00,00,02,05,02,07,02,01,01,01,0c,05,01,08,00,05,00,01,00,04,00,03,00,02,00,00,02,02,00,00,00,00,02,0f,00,01,00,02,00,01,00,00,00,00,00,02,02,04,0c,02,02,01,04,03,06,00,0a,03,07,05,00,00,00,07,01,03,00,01,00,01,02,00,00,05,09,00,02,02,02,00,00,01,06,00,03,01,00,00,01,00,02,00,00,04,00,03,06,02,00,00,01,00,00,00,03,05,02,04,02,01,05,0f,01,00,0f,02,00,02,00,00,00,01,00,02,00,00,01,03,00,00,00,01,05,00,00,00,00,00,01,01,02,00,00,07,02,02,00,01,00,02,02,01,02,03,02,0b,00,01,00,02,00,00,04,08,02,01,01,00,00,01,01,01,00,0a,0b,01,0b,0a,01,00,00,06,00,00,04,00,00,00,01,00,00,01,00,02,00,01,04,02,00,01,00,02,00,00,06,00,03,00,00,01,00,00,03,00,00,00,04,00,10,00,00,05,00,00,04,00,00,00,01,00,01,05,00,00,08,00,02,00,01,04,00,01,01,00,01,01,00,01,00,02,05,07,08,00,08,05,00,02,06,04,01,02,01,03,03,01,03,02,01,11,03,01,00,00,00,00,01,00,03,02,00,00,00,05,02,00,01,03,00,01,0d,06,00,05,02,01,00,03,01,01,07,03,00,00,00,04,03,01,00,0a,00,00,03,01,00,04,00,02,02,00,02,00,02,03,00,00,05,00,00,02,00,01,01,0d,05,00,04,02,08,04,04,00,01,00,05,ES,   3008";
+        
         public void Decode(string data)
         {
             int index = 0;
@@ -177,7 +177,7 @@ namespace SensorSerialProtocolDecoder.Services
 
                     if (data[i].Equals(','))
                     {
-                        j++;
+                   //     j++;
                     }
                 }
                 string JoinedSplittedData = "";
@@ -189,27 +189,84 @@ namespace SensorSerialProtocolDecoder.Services
 
         public void ToDecimal(List<string> data, ref string combinedData)
         {
+            bool readSentence = true;
+            string timeStamp = "";
+            bool isBufforWritten = true;
             int? buffor = null;
-            for(int i = 0; i < data.Count; i++)
+            int i = 0;
+            
+
+            while (readSentence == true)
             {
-                if(i > 3 && i != 7)
+                try
                 {
-                    try
-                    {
-                        //buffor = Convert.ToInt32(data.ElementAt(i), 16);
-                        buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
+                    if (data.ElementAt(i).Contains("TS"))
+                    {                        
+                        timeStamp = data.ElementAt(i + 1);
+                        data[i] = data.ElementAt(i);
+                        i++;
                     }
-                    catch
+                    else if((i == 1) || (i == 2) || (i == 3) || (i == 6))
                     {
+                        data[i] = data.ElementAt(i);
+                        i++;
+                    }                    
+                    else if (data.ElementAt(i).Contains(timeStamp))
+                    {
+                        data[i] = data.ElementAt(i);
+                        i++;
+                        data[i] = data.ElementAt(i);
+                        readSentence = false;
+                    }
+                    else
+                    {                        
+                        data[i] = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber).ToString();
+                        i++;
+                        //buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
+                        //data[i] = buffor.ToString();
 
                     }
-                }                
-
-                if(buffor != null)
+                }
+                catch
                 {
-                    data[i] = buffor.ToString();
-                }                
+                    data[i] = data.ElementAt(i);
+                    i++;
+                }
             }
+            /*
+            try
+            {
+                //buffor = Convert.ToInt32(data.ElementAt(i), 16);                    
+                if (data.ElementAt(i).Contains("TS"))
+                {
+                    //data[i] = $"\n{ data.ElementAt(i) }";                        
+                    data[i] = data.ElementAt(i);                        
+                }
+                else if (data.ElementAt(i).Contains("ES"))
+                {
+                    data[i] = data.ElementAt(i);
+                    i++;
+                    data[i] = data.ElementAt(i);
+                }
+                else
+                {
+                    buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
+                    //buffor = int.Parse(data.ElementAt(i));
+                    isBufforWritten = true;
+                }
+            }
+            catch
+            {
+
+            }
+
+            if (buffor != null && isBufforWritten == true)
+            {
+                data[i] = buffor.ToString();
+            }                
+           // isBufforWritten = false;
+            */
+
             combinedData = CombinedString(data);            
         }
 
@@ -223,7 +280,7 @@ namespace SensorSerialProtocolDecoder.Services
         public void SaveDecodedDataToFile(string buffor, string InitialPath)
         {
             _comPortService.CheckDirectoryExists($@"Decoded\Data");
-            string pathDecoded = $@"Decoded\{InitialPath}.txt";
+            string pathDecoded = $@"Decoded\{InitialPath}";
             using (StreamWriter sw = File.AppendText(pathDecoded))
             {                
                 sw.Write(buffor);
