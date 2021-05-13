@@ -193,10 +193,10 @@ namespace SensorSerialProtocolDecoder.Services
             string timeStamp = "";
             bool isBufforWritten = true;
             int? buffor = null;
-            int i = 0;
+            int i = 0, j = 0;
             
 
-            while (readSentence == true)
+            while (readSentence == true && i<= data.Count)
             {
                 try
                 {
@@ -204,17 +204,22 @@ namespace SensorSerialProtocolDecoder.Services
                     {                        
                         timeStamp = data.ElementAt(i + 1);
                         data[i] = data.ElementAt(i);
+                        j = 0;
+                        j++;
                         i++;
                     }
-                    else if((i == 1) || (i == 2) || (i == 3) || (i == 6))
+                    else if((j == 1) || (j == 2) || (j == 3) || (j == 6))
                     {
                         data[i] = data.ElementAt(i);
                         i++;
+                        j++;
                     }                    
-                    else if (data.ElementAt(i).Contains(timeStamp))
+                    //else if (data.ElementAt(i).Contains(timeStamp))
+                    else if(i>data.LastIndexOf("ES"))
                     {
                         data[i] = data.ElementAt(i);
                         i++;
+                        j++;
                         data[i] = data.ElementAt(i);
                         readSentence = false;
                     }
@@ -222,6 +227,7 @@ namespace SensorSerialProtocolDecoder.Services
                     {                        
                         data[i] = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber).ToString();
                         i++;
+                        j++;
                         //buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
                         //data[i] = buffor.ToString();
 
@@ -229,8 +235,12 @@ namespace SensorSerialProtocolDecoder.Services
                 }
                 catch
                 {
-                    data[i] = data.ElementAt(i);
+                    if(i<data.Count)
+                    {
+                        data[i] = data.ElementAt(i);                        
+                    }
                     i++;
+                    j++;
                 }
             }
             /*
@@ -268,7 +278,7 @@ namespace SensorSerialProtocolDecoder.Services
             */
 
             combinedData = CombinedString(data);            
-        }
+        }       
 
         public string CombinedString(List<string> data)
         {
