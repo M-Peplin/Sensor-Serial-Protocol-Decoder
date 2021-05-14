@@ -184,6 +184,7 @@ namespace SensorSerialProtocolDecoder.Services
                 ToDecimal(splittedData, ref JoinedSplittedData);
                 //string JoinedSplittedData = string.Join("", splittedData);
                 SaveDecodedDataToFile(JoinedSplittedData, $@"Data\Data{counter.ToString()}.txt");
+                counter++;
             }
         }
 
@@ -230,7 +231,6 @@ namespace SensorSerialProtocolDecoder.Services
                         j++;
                         //buffor = int.Parse(data.ElementAt(i), System.Globalization.NumberStyles.HexNumber);
                         //data[i] = buffor.ToString();
-
                     }
                 }
                 catch
