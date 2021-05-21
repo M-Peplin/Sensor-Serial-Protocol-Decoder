@@ -40,7 +40,7 @@
                 <Button Content="Echo Range ON" Grid.Row="0" Margin="5,5,5,5" Style="{StaticResource Standard button}" Command="{Binding Path=EchoRangeOn}"></Button>
                 <Button Content="Echo Range OFF" Grid.Row="0" Grid.Column="1" Style="{StaticResource Standard button}" Command="{Binding EchoRangeOff}"></Button>
                 <Button Content="Display settings" Grid.Row="1" Grid.Column="0" Style="{StaticResource Standard button}"></Button>
-                <Button Content="Set range" Grid.Row="1" Grid.Column="1" Style="{StaticResource Standard button}"></Button>
+                <Button Content="Decode data" Grid.Row="1" Grid.Column="1" Style="{StaticResource Standard button}" Command="{Binding Path=DecodeData}"></Button>
                 <Label Grid.Column="2" Content="Status:" Style="{StaticResource StandardLabel}" HorizontalAlignment="Center"></Label>
                 <Label Grid.Column="2" Grid.Row="1" Content="Range:" Style="{StaticResource StandardLabel}" HorizontalAlignment="Center" Margin="0"></Label>
                 <ComboBox  Grid.Column="3" Grid.Row="1" Style="{StaticResource ComboBoxFlatStyle}" Margin="5"></ComboBox>

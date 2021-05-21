@@ -297,5 +297,11 @@ namespace SensorSerialProtocolDecoder.Services
             }
         }
 
+        public void SaveDecodedDataToSplittedFiles(string buffor)
+        {
+            _comPortService.CheckDirectoryExists($@"Decoded\Data");
+            
+        }
+
     }
 }
